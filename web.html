@@ -1,0 +1,112 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Herald</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+</head>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+
+<body>
+
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase.js"></script>
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyAYYKCrQ0yX4eRkn0fICK-LAGe9RCJbGtY",
+        authDomain: "ystack-sandeep.firebaseapp.com",
+        databaseURL: "https://ystack-sandeep.firebaseio.com",
+        projectId: "ystack-sandeep",
+        storageBucket: "ystack-sandeep.appspot.com",
+        messagingSenderId: "646633028554",
+        appId: "1:646633028554:web:81195c3e0e5ed42e72ad33",
+        measurementId: "G-GR3KEYSLKZ"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+
+    var database = firebase.database();
+    </script>
+
+
+    
+    <form method="POST"> 
+
+            <div class="input">
+            <div class="input-addon">
+                <i class="material-icons">vpn_key</i>
+             </div>
+            <input id="key" name="Key" placeholder="Key" type="text" required class="validate" autocomplete="on">
+        </div>
+<br>
+        <input type="button" value="Retrieve Data" onclick="retrieve()" />
+<br><br>
+
+
+        <div class="mobile">
+            <div class="input-addon">
+                <i class="material-icons">phone</i>
+            </div>
+            <textarea id="mobile" name="paragraph_text" cols="20" rows="5"></textarea>
+        </div>
+<br><br>
+
+        <div class="input">
+            <div class="input-addon">
+                <i class="material-icons">face</i>
+            </div>
+            <input id="input" name="input" placeholder="Input" type="text" required class="validate" autocomplete="off">
+        </div>
+
+        <input type="button" value="Submit" onclick="process()" />
+<br><br>
+        <div class="output">
+            <div class="input-addon">
+                <i class="material-icons">book</i>
+            </div>
+            <textarea id="mobile" name="paragraph_text" cols="20" rows="5"></textarea>
+        </div>
+    </form>
+
+    <script>
+        var data, mobile, output;
+        function process(){
+            var input = document.getElementById("input").value ;
+            var key = document.getElementById("key").value ;
+
+        }
+        function retrieve(){
+            var key = document.getElementById("key").value ;
+
+            var refs = database.ref('rooms/' + key).once('value').then(function(snapshot) {
+                data = (snapshot.val() && snapshot.val().mobile_data) || 'Null';
+                mobile = (snapshot.val() && snapshot.val().mobile_num) || 'Null';
+                output = (snapshot.val() && snapshot.val().output) || 'Null';
+                if(data == 'Null'){
+                    alert("Invalid Room No");
+                    document.getElementById("mobile").value = "";
+                }
+                else{
+
+                    document.getElementById("mobile").value = data;
+                }
+                // ...
+                });
+            //var item = ref.once("123");
+
+            
+        }
+    </script>
+
+</body>
+</html>

@@ -1,3 +1,5 @@
+// Replace all ###Variables with your own Twilio API keys.
+
 var express = require('express');
 var formidable = require('express-formidable');
 
@@ -48,7 +50,7 @@ var sms = function twilioSMS(mobile, output, key){
         console.log("sms sent");
         client2.messages.create({
             to: "whatsapp:"+mobile,
-            from: "whatsapp:"+ ###YourNumber,
+            from: "whatsapp:"+ "###YourNumber",
             body: "The output is: " + output,
         }, callback);
         

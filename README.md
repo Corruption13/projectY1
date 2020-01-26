@@ -1,6 +1,7 @@
 # projectY1
 ## Ystack #Sandeep
 Documentation: [Google Docs](https://docs.google.com/document/d/1HNPsUDdQm3ldGrIiTa98CT0sv9WR2pAEpK1n4WT3Qic/edit?usp=sharing)
+Screenshots of working: ./ProjectY1/Screenshots
 
 ## Instructions
 

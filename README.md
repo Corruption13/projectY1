@@ -2,6 +2,8 @@
 ## Ystack #Sandeep
 Documentation: [Google Docs](https://docs.google.com/document/d/1HNPsUDdQm3ldGrIiTa98CT0sv9WR2pAEpK1n4WT3Qic/edit?usp=sharing)
 
+# Note: for Twilio SMS Feature, update the variables API keys in webapp/server.js file
+
 Screenshots of working: ./ProjectY1/Screenshots
 
 ## Instructions

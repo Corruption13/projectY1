@@ -36,5 +36,4 @@ node server.js
 ### Possible bugs:
 In app Notification and Whatsapp message are inconsistant, works sometimes.
 
-End of Docs
-
+<br>

@@ -1,0 +1,151 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Ystack Sandeep Pillai</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+</head>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+
+<body>
+    <!--<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-firestore.js"></script>
+
+    <script>
+    
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAYYKCrQ0yX4eRkn0fICK-LAGe9RCJbGtY",
+            authDomain: "ystack-sandeep.firebaseapp.com",
+            databaseURL: "https://ystack-sandeep.firebaseio.com",
+            projectId: "ystack-sandeep",
+            storageBucket: "ystack-sandeep.appspot.com",
+            messagingSenderId: "646633028554",
+            appId: "1:646633028554:web:81195c3e0e5ed42e72ad33",
+            measurementId: "G-GR3KEYSLKZ"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        var database = firebase.firestore();
+    </script>
+
+
+    
+    <form method="POST" id="form1"> 
+
+            <div class="input">
+            <div class="input-addon">
+                <i class="material-icons">vpn_key</i> Room Key
+             </div>
+            <input id="key" name="key" placeholder="Key" type="text" required class="validate" autocomplete="on">
+        </div>
+
+        <br>
+
+        <input type="button" value="Retrieve Data" onclick="retrieve()" />
+
+        <br><br>
+
+
+        <div class="mobile">
+            <div class="input-addon">
+                <i class="material-icons">phone</i> Mobile Number
+            </div>
+            <textarea id="mobile" name="mobile" cols="20" rows="2" readonly></textarea>
+        </div>
+                <div class="output_mobile">
+            <div class="input-addon">
+                <i class="material-icons">settings_cell</i> Mobile Data
+            </div>
+            <textarea id="output_mobile" name="output_mobile" cols="20" rows="3" readonly></textarea>
+        </div>
+
+        <br><br>
+
+        <div class="input">
+            <div class="input-addon">
+                <i class="material-icons">face</i> Web Input
+            </div>
+            <input id="input" name="input" placeholder="Input" type="text" required class="validate" autocomplete="off">
+        </div>
+
+        <input type="button" value="Submit" onclick="process()" />
+
+        <br><br>
+
+        <div class="output">
+            <div class="input-addon">
+                <i class="material-icons">check_circle</i> Final Output
+            </div>
+            <textarea id="output" name="output" cols="20" rows="5" readonly></textarea>
+        </div>
+
+    </form>
+
+    <script>
+        //var data, mobile, output;
+        function process(){
+            var input = document.getElementById("input").value ;
+            var key = document.getElementById("key").value ;
+            var mobile_data_val = document.getElementById("output_mobile").value ;
+            if(mobile_data_val == ""){
+                alert("Please Enter a valid room no");
+            }
+            else{
+                var concat_data = mobile_data_val +  input;
+                document.getElementById("output").value = concat_data;
+                database.collection("rooms").doc(key).update({
+                    output: concat_data
+                
+                })
+                .then(function() {
+                    console.log("Document successfully written!");
+                    document.getElementById("form1").submit();
+                })
+                .catch(function(error) {
+                    console.error("Error writing document: ", error);
+                    alert(error);
+                });
+            }
+            
+        }
+
+
+        function retrieve(){
+           
+            var key = document.getElementById("key").value ;
+
+        var docRef = database.collection("rooms").doc(key);
+        docRef.get().then(function(doc) {
+            if (doc.exists) {
+                var item = doc.data()
+                document.getElementById("mobile").value = item["mobile_num"];
+                document.getElementById("output_mobile").value = item["mobile_data"];
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such room!");
+                alert("No Such Room!");
+                document.getElementById("mobile").value = "";
+                document.getElementById("output_mobile").value = "";
+            }
+        }).catch(function(error) {
+            console.log("Error getting room:", error);
+            document.getElementById("mobile").value = "";
+            document.getElementById("output_mobile").value = "";
+        });
+
+        }
+    </script>
+
+</body>
+</html>

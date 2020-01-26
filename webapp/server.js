@@ -29,8 +29,8 @@ var server = app.listen(8081, function () {
 var sms = function twilioSMS(mobile, output, key){
     console.log("SMS to ", mobile);
     // Twilio Credentials
-    var accountSid = 'AC0d7b026d96c2c53ddb3c642160969074';
-    var authToken = "e5bd8ee87831cd02e5feb9ca99c95ec2";
+    var accountSid = '###YourSiD';
+    var authToken = "###YourAUTH";
     if (mobile[0]!= "+"){
         mobile = "+91"+mobile;
     }
@@ -42,13 +42,13 @@ var sms = function twilioSMS(mobile, output, key){
         console.log("starting");
         client.messages.create({
             to: mobile,
-            from: "+16193892238",
+            from: "+###YourNumber",
             body: "The output is: " + output,
         }, callback);
         console.log("sms sent");
         client2.messages.create({
             to: "whatsapp:"+mobile,
-            from: "whatsapp:+16193892238",
+            from: "whatsapp:"+ ###YourNumber,
             body: "The output is: " + output,
         }, callback);
         
